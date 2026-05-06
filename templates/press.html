@@ -153,7 +153,51 @@
       .articles-grid { grid-template-columns: 1fr; }
     }
   
-{% endblock %}
+
+    /* ---- VANITHA 4-IMAGE GALLERY ---- */
+    .vanitha-gallery { cursor: pointer; }
+    .gallery-track {
+      display: flex;
+      height: 100%;
+      transition: transform .4s cubic-bezier(.4,0,.2,1);
+    }
+    .gallery-track img {
+      min-width: 100%; width: 100%; height: 100%;
+      object-fit: cover; object-position: top;
+      flex-shrink: 0; display: block;
+    }
+    .gallery-dots {
+      position: absolute; bottom: 12px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 6px; z-index: 10;
+    }
+    .gdot {
+      width: 8px; height: 8px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,.5);
+      cursor: pointer; padding: 0; transition: background .2s, transform .2s;
+    }
+    .gdot.active { background: #fff; transform: scale(1.3); }
+    .gallery-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,.35); color: #fff;
+      border: none; border-radius: 50%;
+      width: 36px; height: 36px;
+      font-size: 22px; line-height: 1;
+      cursor: pointer; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .gallery-arrow:hover { background: rgba(0,0,0,.6); }
+    .gallery-arrow.left  { left: 10px; }
+    .gallery-arrow.right { right: 10px; }
+    .gallery-label {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(136,14,79,.85); color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      padding: 3px 8px; border-radius: 4px; z-index: 10;
+    }
+
+  {% endblock %}
 
 {% block content %}
 
@@ -161,7 +205,7 @@
 <!-- HERO -->
 <section class="press-hero">
   <div class="container">
-    <h1>Stories of <em>Silent Service</em></h1>
+    <h1>Stories of <em>Quiet Service</em></h1>
     <p>How the media has covered 25+ years of Matha Vanitha Charitable Society's unbroken mission at Trivandrum General Hospital.</p>
   </div>
 </section>
@@ -211,40 +255,52 @@
           </div>
 
           <p>The feature also notes that the Society's work gained attention when the then Superintendent of the hospital, Supraja, appreciated their commitment. The administration and the Health Minister later facilitated upgrades to the ward. Cooking volunteers — Venugopala Krishnanarayan, Jayalakshmi, and others — are named as the backbone of the cooking team.</p>
-          <div class="article-byline">By K.S. Aravind · Kerala Kaumudi Epaper · 30 April 2026</div>
+          <a href="https://keralakaumudi.com/epaper/article" target="_blank" rel="noopener" style="display:inline-block;margin-bottom:1rem;background:var(--terra);color:#fff;padding:8px 18px;border-radius:40px;font-size:13px;font-weight:600;text-decoration:none;">Read on Kaumudi Epaper →</a>
+          <div class="article-byline">By K.S. Aravind · Kerala Kaumudi Epaper · 30 April 2026 · <a href="https://keralakaumudi.com/epaper/article" target="_blank" rel="noopener" style="color:var(--terra);text-decoration:none;font-weight:600;">View on Kaumudi Epaper →</a></div>
         </div>
       </article>
 
-      <!-- ===== VANITHA MAGAZINE — APR 25–MAY 8, 2026 (FEATURED) ===== -->
+      <!-- ===== VANITHA MAGAZINE — APR 25–MAY 8, 2026 (FEATURED) =====  -->
       <article class="article-card featured" data-outlet="vanitha">
-        <div class="article-img" style="overflow:hidden; background:#fce4ec;">
-          <img src="{{ images.vanitha1 }}" alt="Vanitha Magazine spread — Sayahna Savarigal" style="width:100%; height:100%; object-fit:cover; object-position:top;">
+        <div class="article-img vanitha-gallery" style="width:45%;min-height:400px;overflow:hidden;position:relative;background:#fce4ec;">
+          <!-- 4-image carousel -->
+          <div class="gallery-track" id="vanitha-track">
+            <img src="{{ images.vanitha4 }}" alt="Vanitha p.26 — Article opener, Sayahna Savarigal">
+            <img src="{{ images.vanitha3 }}" alt="Vanitha p.27 — ദൈവം ഒൻപതാം വാർഡിൽ portrait">
+            <img src="{{ images.vanitha2 }}" alt="Vanitha p.28 — Sri Radhakrishna Pillai portrait">
+            <img src="{{ images.vanitha1 }}" alt="Vanitha p.29 — Team photo and conclusion">
+          </div>
+          <!-- dots -->
+          <div class="gallery-dots" id="vanitha-dots">
+            <button class="gdot active" onclick="goSlide(0)"></button>
+            <button class="gdot" onclick="goSlide(1)"></button>
+            <button class="gdot" onclick="goSlide(2)"></button>
+            <button class="gdot" onclick="goSlide(3)"></button>
+          </div>
+          <!-- arrows -->
+          <button class="gallery-arrow left"  onclick="goSlide(currentSlide-1)">&#8249;</button>
+          <button class="gallery-arrow right" onclick="goSlide(currentSlide+1)">&#8250;</button>
+          <!-- page label -->
+          <div class="gallery-label" id="vanitha-label">p.26</div>
         </div>
         <div class="article-body">
           <div class="article-meta">
             <span class="outlet-tag tag-vanitha">Vanitha Magazine</span>
-            <span class="article-date">April 25 – May 8, 2026 · Sayahna Savarigal Series</span>
+            <span class="article-date">April 25 – May 8, 2026 · Sayahna Savarigal Series · pp. 26–29</span>
           </div>
           <div class="article-subtitle">സായാഹ്ന സവാരികൾ — "Twilight Travellers"</div>
           <h2>The Society That Prints Its Income-Expense Accounts and Distributes Them Every Year</h2>
 
-          <p>Vanitha Magazine's celebrated "Sayahna Savarigal" (Twilight Travellers) series — which profiles individuals who have rediscovered purpose after retirement — dedicated a 3-page spread (pp. 26–29) to Sri M. Radhakrishna Pillai and Matha Vanitha Charitable Society in its April 25–May 8, 2026 issue.</p>
-
-          <div class="newspaper-clip">
-            <div class="clip-source">Vanitha Magazine · By V.R. Jyothish · Photos: Arun Soul</div>
-            <p class="ml-text">പുലർച്ചെ നാലു മണിക്ക് ഉണരും. ഊണ് മൂന്ന് നേരവും ആശുപത്രിയിലെ അന്തേവാസികൾക്ക്. ഇപ്പോൾ കൂടുതൽ പേർക്ക് ആഹാരം കൊടുക്കുന്നു. അതുകൊണ്ട് ഞണ്ടേർ ഞണ്ടേറ് കണ്ണും ഇറക്കിത്തണ്ടേ. ഇന്ന് അതിരാവിലെ ഉറക്കമുണർന്ന് രൂണ്ടേ. ഡൈൻ ഫ്ളോർ, ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ.</p>
-            <p class="ml-text">"ഇണ്ണോം ഞൊറ്റിൻ്ററോ ഒരു സഹായം ചൊദ്ദിക്കേണ്ടി ഇല്ല. അറിഞ്ഞ് കൊണ്ടേ പണി ഒരു സഹായിക്കാൻ ഞൊറ്റു വരന്നവരോടേ ഞൊണ്ണ് പറഞ്ഞിരുന്നില്ല." — രാധാകൃഷ്ണപിള്ളയുടെ വാക്കുകൾ.</p>
-          </div>
-
-          <p>The article describes how Pillai wakes at 4 AM daily, oversees cooking with the help of a few volunteers, and personally brings the food containers to Ward 9. The Society's secretary, Smt. R. Jayalakshmi, is Executive Officer of the State Secretariat (now retired), and Smt. Shilaja Venugopala is also a key member.</p>
-          <p>A notable detail: the Society prints its full annual income-expense accounts and distributes them to all supporters — an act of extraordinary transparency almost unheard of in charitable organisations. Jaylakshmi notes: "Each year we account for every rupee received and every rupee spent, print it, and give it to everyone who has supported us."</p>
+          <p>Vanitha Magazine's celebrated "Sayahna Savarigal" (Twilight Travellers) series dedicated a 4-page spread (pp. 26–29) to Sri M. Radhakrishna Pillai and Matha Vanitha Charitable Society in its April 25–May 8, 2026 issue.</p>
+          <p>The spread features a stunning full-page portrait (p.27) of Pillai captioned <em>"ദൈവം ഒൻപതാം വാർഡിൽ"</em> (God in Ward Nine), alongside the team photo of Jayalakshmi, Sasinarayanan, Shilaja Venugopala, and others who have sustained this mission for 26 years.</p>
 
           <div class="article-pullquote">
             "ഭക്ഷണം കഴിക്കുമ്പോൾ അവരുടെ മുഖം തെളിയുന്നത് കാണാം. കണ്ണു നിറയുന്നതും."<br>
             <small style="font-family:var(--font-body)">— M. Radhakrishna Pillai (Vanitha Magazine, April 2026)</small>
           </div>
 
-          <p>The spread includes a group photograph of Jayalakshmi, Sasinarayanan, Shilaja Venugopala, and Nagan S. Nair alongside Jayakrishna Pillai — the core team that has kept the mission going for 26 years.</p>
+          <p>A notable detail highlighted in the article: the Society prints its full annual income-expense accounts and distributes them to all supporters — extraordinary transparency almost unheard of in charitable organisations.</p>
+          <a href="https://www.vanitha.in" target="_blank" rel="noopener" style="display:inline-block;margin-bottom:1rem;background:#880e4f;color:#fff;padding:8px 18px;border-radius:40px;font-size:13px;font-weight:600;text-decoration:none;">Visit Vanitha →</a>
           <div class="article-byline">By V.R. Jyothish · Photography: Arun Soul · Vanitha Magazine, April 25–May 8, 2026 · pp. 26–29</div>
         </div>
       </article>
@@ -313,7 +369,8 @@
             "I will not let the people in the ward go without food. It is as simple as that."<br>
             <small style="font-family:var(--font-body)">— M. Radhakrishna Pillai</small>
           </div>
-          <div class="article-byline">New Indian Express · August 25, 2023</div>
+          <a href="https://www.newindianexpress.com/kerala/2023/Aug/25/pillais-lunch-mission-continues-to-be-a-fulfilling-cause-2608516.html" target="_blank" rel="noopener" style="display:inline-block;margin-bottom:1rem;background:var(--teal);color:#fff;padding:8px 18px;border-radius:40px;font-size:13px;font-weight:600;text-decoration:none;">Read Full Article →</a>
+          <div class="article-byline">New Indian Express · August 25, 2023 · <a href="https://www.newindianexpress.com/kerala/2023/Aug/25/pillais-lunch-mission-continues-to-be-a-fulfilling-cause-2608516.html" target="_blank" rel="noopener" style="color:var(--terra);text-decoration:none;font-weight:600;">Read Article →</a></div>
         </div>
       </article>
 
@@ -337,7 +394,7 @@
           </div>
           <p>Kerala Health Minister Veena George visited Ward 9 of General Hospital to provide clothes to patients. During the visit, she encountered Sri Radhakrishna Pillai and his team delivering their daily meals — as they have done every day for 24 years without exception.</p>
           <p>The Minister posted about the encounter on Facebook, calling the service "exemplary silent service" and praising the Matha Vanitha Charitable Society's dedication. She noted that Pillai's own family — including his children and grandchildren — had come from out of town that day to help cook and distribute the food. The post was widely shared and attracted significant public attention.</p>
-          <div class="article-byline">Veena George, Health Minister, Kerala · Facebook · August 29, 2023</div>
+          <div class="article-byline">Veena George, Health Minister, Kerala · Facebook · August 29, 2023 · <a href="https://www.facebook.com/VeenaGeorgeINC" target="_blank" rel="noopener" style="color:var(--terra);text-decoration:none;font-weight:600;">View on Facebook →</a></div>
         </div>
       </article>
 
@@ -456,4 +513,35 @@ filterBtns.forEach(btn => {
   });
 });
 </script>
+
+<script>
+var currentSlide = 0;
+var pageLabels = ['p.26', 'p.27', 'p.28', 'p.29'];
+
+function goSlide(n) {
+  var total = 4;
+  currentSlide = ((n % total) + total) % total;
+  var track = document.getElementById('vanitha-track');
+  var label = document.getElementById('vanitha-label');
+  var dots  = document.querySelectorAll('.gdot');
+  if (track) track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+  if (label) label.textContent = pageLabels[currentSlide];
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === currentSlide); });
+}
+
+// Auto-advance every 4 seconds
+setInterval(function() { goSlide(currentSlide + 1); }, 4000);
+
+// Touch/swipe support
+var touchStartX = 0;
+var track = document.getElementById('vanitha-track');
+if (track) {
+  track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+  track.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1);
+  });
+}
+</script>
+
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify
 import os
 from datetime import datetime
 
@@ -18,13 +18,12 @@ STATS = {
     "started": "28 April 2000"
 }
 
-# Image URLs — using /public/images/ path served by Vercel static
 IMAGES = {
-    "kaumudi": "/public/images/kaumudi.jpg",
-    "vanitha1": "/public/images/vanitha1.jpg",
-    "vanitha2": "/public/images/vanitha2.jpg",
-    "vanitha3": "/public/images/vanitha3.jpg",
-    "vanitha4": "/public/images/vanitha4.jpg",
+    "kaumudi":  "/public/images/kaumudi.jpg",
+    "vanitha1": "/public/images/vanitha1.jpg",  # p.29 — group photo + text
+    "vanitha2": "/public/images/vanitha2.jpg",  # p.28 — Pillai portrait + text
+    "vanitha3": "/public/images/vanitha3.jpg",  # p.27 — full portrait cover
+    "vanitha4": "/public/images/vanitha4.jpg",  # p.26 — article opener
 }
 
 @app.route("/")
