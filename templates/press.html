@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>In the News — Matha Vanitha Charitable Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/main.css">
+  <style>
+    /* ---- PRESS-PAGE SPECIFIC ---- */
+    .press-hero {
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .press-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .press-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem,5vw,4rem); color: #fff; margin-bottom: 1rem; position: relative;
+    }
+    .press-hero h1 em { color: var(--gold); }
+    .press-hero p { color: rgba(255,255,255,.75); max-width:580px; margin:0 auto; font-size:1.1rem; position:relative; }
+
+    /* outlet filter bar */
+    .filter-bar {
+      background: var(--cream); border-bottom: 1px solid var(--border);
+      position: sticky; top: 64px; z-index: 50;
+    }
+    .filter-inner {
+      max-width:1160px; margin:0 auto; padding:0 2rem;
+      display:flex; gap:1rem; overflow-x:auto; padding-top:.75rem; padding-bottom:.75rem;
+      scrollbar-width:none;
+    }
+    .filter-inner::-webkit-scrollbar { display:none; }
+    .filter-btn {
+      flex-shrink:0; padding:7px 18px; border-radius:40px; border:1.5px solid var(--border);
+      background:#fff; font-family:var(--font-body); font-size:13px; font-weight:500;
+      cursor:pointer; color:var(--mid); transition:.2s; white-space:nowrap;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background:var(--teal); color:#fff; border-color:var(--teal);
+    }
+
+    /* articles grid */
+    .articles-section { padding: 4rem 0 6rem; background: var(--warm-white); }
+    .articles-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px,1fr));
+      gap: 2rem; align-items: start;
+    }
+
+    /* article card */
+    .article-card {
+      background: #fff; border-radius: var(--radius-lg);
+      border: 1px solid var(--border); overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      display: flex; flex-direction: column;
+    }
+    .article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .article-card.featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+    }
+    .article-img {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      background: var(--teal-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .article-card.featured .article-img {
+      width: 45%; aspect-ratio: unset; flex-shrink: 0;
+    }
+    .article-body { padding: 1.75rem; flex: 1; }
+    .article-meta {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .outlet-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+    }
+    .tag-kaumudi { background: #fff3cd; color: #856404; }
+    .tag-vanitha  { background: #fce4ec; color: #880e4f; }
+    .tag-nie      { background: #e8f5e9; color: #1b5e20; }
+    .tag-asianet  { background: #e3f2fd; color: #0d47a1; }
+    .tag-doordarshan { background: #f3e5f5; color: #4a148c; }
+    .article-date { font-size: 12px; color: var(--light-text); }
+    .article-body h2 {
+      font-family: var(--font-display);
+      font-size: 1.35rem; color: var(--dark); margin-bottom: .75rem;
+      line-height: 1.3;
+    }
+    .article-card.featured .article-body h2 { font-size: 1.7rem; }
+    .article-body .article-subtitle {
+      font-size: 13px; color: var(--terra); font-weight: 600;
+      margin-bottom: .75rem; font-style: italic;
+    }
+    .article-body p {
+      font-size: 14px; color: var(--mid); line-height: 1.8; margin-bottom: 1rem;
+    }
+    .article-card.featured .article-body p { font-size: 15px; }
+    .article-pullquote {
+      background: var(--teal-pale); border-left: 3px solid var(--teal);
+      padding: .875rem 1rem; border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1rem 0; font-style: italic; font-size: 14px; color: var(--teal);
+      line-height: 1.6;
+    }
+    .article-byline {
+      font-size: 12px; color: var(--light-text); margin-top: auto; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Malayalam text styling */
+    .ml-text {
+      font-family: 'Noto Sans Malayalam', sans-serif;
+      font-size: 15px; color: var(--mid); line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+    .ml-heading {
+      font-family: 'Noto Sans Malayalam', sans-serif;
+      font-size: 1.1rem; font-weight: 600; color: var(--dark);
+      margin: 1rem 0 .5rem;
+    }
+
+    /* scrapbook-style newspaper clip */
+    .newspaper-clip {
+      background: #faf8f0;
+      border: 1px solid #e0d9c4;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      position: relative;
+      box-shadow: 2px 3px 12px rgba(0,0,0,.06);
+      margin-bottom: 1rem;
+    }
+    .newspaper-clip::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: repeating-linear-gradient(90deg, var(--terra) 0 8px, transparent 8px 12px);
+    }
+    .clip-source {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--terra); margin-bottom: .75rem;
+    }
+
+    /* hidden filter */
+    .article-card[data-outlet].hidden { display: none; }
+
+    @media (max-width: 768px) {
+      .article-card.featured { flex-direction: column; }
+      .article-card.featured .article-img { width: 100%; aspect-ratio: 16/9; }
+      .articles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><span class="logo-mark">MVS</span><span class="logo-text">Matha Vanitha</span></a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">Our Story</a></li>
+      <li><a href="/press">In the News</a></li>
+      <li><a href="/donate" class="btn-nav">Donate</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="press-hero">
+  <div class="container">
+    <h1>Stories of <em>Quiet Service</em></h1>
+    <p>How the media has covered 25+ years of Matha Vanitha Charitable Society's unbroken mission at Trivandrum General Hospital.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All Coverage</button>
+    <button class="filter-btn" data-filter="kaumudi">Kerala Kaumudi</button>
+    <button class="filter-btn" data-filter="vanitha">Vanitha Magazine</button>
+    <button class="filter-btn" data-filter="nie">New Indian Express</button>
+    <button class="filter-btn" data-filter="asianet">Asianet</button>
+    <button class="filter-btn" data-filter="doordarshan">Doordarshan</button>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<section class="articles-section">
+  <div class="container">
+    <div class="articles-grid" id="articlesGrid">
+
+      <!-- ===== KERALA KAUMUDI — 30 APR 2026 (FEATURED / LATEST) ===== -->
+      <article class="article-card featured" data-outlet="kaumudi">
+        <div class="article-img" style="background:var(--terra-pale); align-items:flex-start; overflow:hidden;">
+          <!-- Decorative newspaper-style layout mimicking the article -->
+          <div style="padding:1.5rem; width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; background: linear-gradient(135deg,#fdf3ee,#fae8df);">
+            <div style="font-family:'Playfair Display',serif; font-size:.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--terra); margin-bottom:.5rem;">കേരള കൗമുദി · 30 Apr 2026</div>
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:1.6rem; font-weight:700; color:var(--dark); line-height:1.3; margin-bottom:.75rem;">94ലും ഒൻപതാം വാർഡിന്റെ അന്നദാതാവിന് ചെറുപ്പം</div>
+            <div style="background:var(--terra); color:#fff; padding:.4rem .75rem; border-radius:4px; font-family:'Noto Sans Malayalam',sans-serif; font-size:.85rem; display:inline-block; margin-bottom:1rem;">26 വർഷമായി വീട്ടിൽ ഭക്ഷണമുണ്ടാക്കി നൽകുന്നു</div>
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:.9rem; color:var(--mid); line-height:1.7;">നാലു കൂട്ടം കറി നിർബന്ധം · ഒൻപതാം വാർഡിലെ അന്നദാതാവ്</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-kaumudi">Kerala Kaumudi</span>
+            <span class="article-date">30 April 2026 · Kaumudi Special</span>
+          </div>
+          <div class="article-subtitle">94ലും ഒൻപതാം വാർഡിന്റെ അന്നദാതാവിന് ചെറുപ്പം</div>
+          <h2>"At 94, He Still Cooks and Carries Meals to the Hospital — Every Single Day"</h2>
+
+          <div class="newspaper-clip">
+            <div class="clip-source">Kerala Kaumudi Epaper · By K.S. Aravind</div>
+            <p class="ml-text">തിരുവനന്തപുരം: കാർന്റ്റോ ബോയി രാധാകൃഷ്ണപിള്ളയുടെ വീടിന്റെ അടുക്കളയിൽ തീ എരിയുന്നത് ആശ്രരണായ രോഗികൾക്കു വേണ്ടി. തിരുവനന്തപുരം ജനറൽ ആശുപത്രിയിലെ ഒൻപതാം വാർഡ് നിലവിളിച്ചവർക്ക് മൂന്നിൽ 26 വർഷം മുൻപ് അവതരിച്ച പച്ചമഞ്ഞ്ടൻ ലക്ഷ്മി മന്ദിരത്തിൽ എം. രാധാകൃഷ്ണ പിള്ള.</p>
+            <p class="ml-text">പിറ്റ്ണ്ണ്യുമായി എന്നും ഒഷ്ഠൻ ദായിരുന്ന ഭാര്യ ഇന്ദിരാമ്മയുടെ മരണ ദിവസം പോലും ഒൻപതാം വാർഡ് രാധാകൃഷ്ണ പിള്ള ഭക്ഷണം മടക്കിയില്ല.</p>
+          </div>
+
+          <p>The Kerala Kaumudi's Kaumudi Special feature (30 April 2026) profiles M. Radhakrishna Pillai, now 94 years old, who continues to oversee the cooking and delivery of free noon meals to patients at Ward 9 of Thiruvananthapuram General Hospital — a commitment he has maintained without a single break for 26 years.</p>
+          <p>The article highlights the remarkable discipline of the meals: a minimum of four curries is compulsory for every serving. The food is cooked in Sri Pillai's own home at Lekshmi Mandiram and personally brought to the hospital. Even on the day his wife Indiramma passed away, the meals were not stopped.</p>
+
+          <div class="article-pullquote">
+            "ത്യാഗനിർഭരവും സേവനനിരതവുമായ ജീവിതത്തെക്കുറിച്ച് അറിഞ്ഞപ്പോൾ സ്വാമി അപ്പൂഷൻ എന്നുവിളിക്കാനാണ് തോന്നിയത്."<br>
+            <small style="font-family:var(--font-body)">— Mohanlal (television programme, as reported in Kerala Kaumudi)</small>
+          </div>
+
+          <p>The feature also notes that the Society's work gained attention when the then Superintendent of the hospital, Supraja, appreciated their commitment. The administration and the Health Minister later facilitated upgrades to the ward. Cooking volunteers — Venugopala Krishnanarayan, Jayalakshmi, and others — are named as the backbone of the cooking team.</p>
+          <div class="article-byline">By K.S. Aravind · Kerala Kaumudi Epaper · 30 April 2026</div>
+        </div>
+      </article>
+
+      <!-- ===== VANITHA MAGAZINE — APR 25–MAY 8, 2026 (FEATURED) ===== -->
+      <article class="article-card featured" data-outlet="vanitha">
+        <div class="article-img" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0); overflow:hidden; align-items:flex-start;">
+          <div style="padding:1.5rem; width:100%; height:100%; display:flex; flex-direction:column; justify-content:center;">
+            <div style="font-size:.65rem; letter-spacing:2px; text-transform:uppercase; color:#880e4f; margin-bottom:.5rem; font-weight:700;">വനിത · Apr 25 – May 8, 2026</div>
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:1.4rem; font-weight:700; color:#4a0020; line-height:1.3; margin-bottom:.75rem;">സായാഹ്ന സവാരികൾ</div>
+            <div style="background:#880e4f; color:#fff; padding:.4rem .75rem; border-radius:4px; font-family:'Noto Sans Malayalam',sans-serif; font-size:.85rem; display:inline-block; margin-bottom:.75rem;">ഓരോ വർഷത്തെയും വരവ് ചെലവ് കണക്കുകൾ അച്ചടിച്ചു വിതരണം ചെയ്യും</div>
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:.85rem; color:#880e4f; line-height:1.7;">മാതാ വനിതാ ചാരിറ്റബിൾ സൊസൈറ്റി</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-vanitha">Vanitha Magazine</span>
+            <span class="article-date">April 25 – May 8, 2026 · Sayahna Savarigal Series</span>
+          </div>
+          <div class="article-subtitle">സായാഹ്ന സവാരികൾ — "Twilight Travellers"</div>
+          <h2>The Society That Prints Its Income-Expense Accounts and Distributes Them Every Year</h2>
+
+          <p>Vanitha Magazine's celebrated "Sayahna Savarigal" (Twilight Travellers) series — which profiles individuals who have rediscovered purpose after retirement — dedicated a 3-page spread (pp. 26–29) to Sri M. Radhakrishna Pillai and Matha Vanitha Charitable Society in its April 25–May 8, 2026 issue.</p>
+
+          <div class="newspaper-clip">
+            <div class="clip-source">Vanitha Magazine · By V.R. Jyothish · Photos: Arun Soul</div>
+            <p class="ml-text">പുലർച്ചെ നാലു മണിക്ക് ഉണരും. ഊണ് മൂന്ന് നേരവും ആശുപത്രിയിലെ അന്തേവാസികൾക്ക്. ഇപ്പോൾ കൂടുതൽ പേർക്ക് ആഹാരം കൊടുക്കുന്നു. അതുകൊണ്ട് ഞണ്ടേർ ഞണ്ടേറ് കണ്ണും ഇറക്കിത്തണ്ടേ. ഇന്ന് അതിരാവിലെ ഉറക്കമുണർന്ന് രൂണ്ടേ. ഡൈൻ ഫ്ളോർ, ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ ഡൈൻ.</p>
+            <p class="ml-text">"ഇണ്ണോം ഞൊറ്റിൻ്ററോ ഒരു സഹായം ചൊദ്ദിക്കേണ്ടി ഇല്ല. അറിഞ്ഞ് കൊണ്ടേ പണി ഒരു സഹായിക്കാൻ ഞൊറ്റു വരന്നവരോടേ ഞൊണ്ണ് പറഞ്ഞിരുന്നില്ല." — രാധാകൃഷ്ണപിള്ളയുടെ വാക്കുകൾ.</p>
+          </div>
+
+          <p>The article describes how Pillai wakes at 4 AM daily, oversees cooking with the help of a few volunteers, and personally brings the food containers to Ward 9. The Society's secretary, Smt. R. Jayalakshmi, is Executive Officer of the State Secretariat (now retired), and Smt. Shilaja Venugopala is also a key member.</p>
+          <p>A notable detail: the Society prints its full annual income-expense accounts and distributes them to all supporters — an act of extraordinary transparency almost unheard of in charitable organisations. Jaylakshmi notes: "Each year we account for every rupee received and every rupee spent, print it, and give it to everyone who has supported us."</p>
+
+          <div class="article-pullquote">
+            "ഭക്ഷണം കഴിക്കുമ്പോൾ അവരുടെ മുഖം തെളിയുന്നത് കാണാം. കണ്ണു നിറയുന്നതും."<br>
+            <small style="font-family:var(--font-body)">— M. Radhakrishna Pillai (Vanitha Magazine, April 2026)</small>
+          </div>
+
+          <p>The spread includes a group photograph of Jayalakshmi, Sasinarayanan, Shilaja Venugopala, and Nagan S. Nair alongside Jayakrishna Pillai — the core team that has kept the mission going for 26 years.</p>
+          <div class="article-byline">By V.R. Jyothish · Photography: Arun Soul · Vanitha Magazine, April 25–May 8, 2026 · pp. 26–29</div>
+        </div>
+      </article>
+
+      <!-- ===== VANITHA — SAYAHNA SAVARIGAL PART 1 (smaller card) ===== -->
+      <article class="article-card" data-outlet="vanitha">
+        <div class="article-img" style="background:linear-gradient(135deg,#fce4ec,#e8d5f5); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:1.2rem; font-weight:700; color:#4a0020; line-height:1.4; margin-bottom:.5rem;">ഒൻപതാം വാർഡ്</div>
+            <div style="font-size:2.5rem;">🏥</div>
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:.85rem; color:#880e4f; margin-top:.5rem;">'ഭൂമിയിലെ നരകം' → ഇന്ന് ആ അവസ്ഥ മാറി</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-vanitha">Vanitha Magazine</span>
+            <span class="article-date">April 25 – May 8, 2026 · p. 26</span>
+          </div>
+          <h2>"Ward 9 Was Once Called Hell on Earth. That Has Changed."</h2>
+          <p>The first part of Vanitha's spread (page 26) recounts how Ward 9 of Trivandrum General Hospital was notorious for its wretched conditions — abandoned elderly patients, no food, no care. The Matha Vanitha Society's silent, consistent presence changed the ward's fate.</p>
+          <div class="article-pullquote">
+            "ഇതുപോലെയുള്ള ഒരുപാട് രാധാകൃഷ്ണ പിള്ളമാർ ഈ ലോകത്ത് ഉണ്ടാകട്ടെ…"<br>
+            <small style="font-family:var(--font-body)">— Vanitha Magazine readers' response</small>
+          </div>
+          <p>The article describes how Mohanlal, after appearing on a television programme alongside Pillai, affectionately called him "Swami Appupan" — a spiritual grandfather — and praised his extraordinary life. Mohanlal's words, shared in the telecast, brought national attention to the Society's work.</p>
+          <div class="article-byline">Vanitha Magazine · April 25–May 8, 2026</div>
+        </div>
+      </article>
+
+      <!-- ===== VANITHA — WARD 9 MENTAL HEALTH SIDEBAR ===== -->
+      <article class="article-card" data-outlet="vanitha">
+        <div class="article-img" style="background:linear-gradient(135deg,#e8f5e9,#c8e6c9); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-size:2.5rem;">🧠</div>
+            <div style="font-family:'Noto Sans Malayalam',sans-serif; font-size:1rem; font-weight:700; color:#1b5e20; line-height:1.4; margin-top:.5rem;">വാർദ്ധക്യത്തിലെ മാനസികാരോഗ്യം</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-vanitha">Vanitha Magazine</span>
+            <span class="article-date">April 25 – May 8, 2026 · p. 28 sidebar</span>
+          </div>
+          <h2>Mental Health in Old Age — Tips from the Ward 9 Story</h2>
+          <p>Alongside the profile, Vanitha ran a companion sidebar on mental wellness for the elderly — drawing inspiration from Pillai's own vigour and positivity at 94. Key advice included:</p>
+          <ul style="margin:.75rem 0 .75rem 1.25rem; color:var(--mid); font-size:14px; line-height:2;">
+            <li>Engage in work of the highest quality (കാര്യങ്ങൾ ശ്രദ്ധിക്കൂ)</li>
+            <li>Community participation — groups, neighbourhood networks, social service associations</li>
+            <li>Hobbies: reading, farming, cooking, music</li>
+            <li>Meaningful sleep: 7–8 hours; avoid excessive rest</li>
+            <li>Healthy eating — include vegetables; avoid processed food</li>
+          </ul>
+          <div class="article-byline">Vanitha Magazine · April 25–May 8, 2026 · p. 28</div>
+        </div>
+      </article>
+
+      <!-- ===== NEW INDIAN EXPRESS — AUG 2023 ===== -->
+      <article class="article-card" data-outlet="nie">
+        <div class="article-img" style="background:linear-gradient(135deg,#e8f5e9,#dcedc8); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-size:2.5rem;">📰</div>
+            <div style="font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:#1b5e20; font-weight:700; margin-top:.5rem;">New Indian Express</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-nie">New Indian Express</span>
+            <span class="article-date">August 25, 2023</span>
+          </div>
+          <h2>"Pillai's Lunch Mission Continues to Be a Fulfilling Cause"</h2>
+          <p>The New Indian Express profiled Sri M. Radhakrishna Pillai's extraordinary mission, noting that over two decades after he started the free meal programme, the commitment remains as strong as ever. The report highlighted how he and the Matha Vanitha Society have served continuously at Ward 9 of General Hospital, Trivandrum, since 28 April 2000.</p>
+          <p>The article captured how family members and well-wishers have joined in over the years, particularly on Thursdays — the day Pillai's family dedicates to Annadanam — turning it into a community ritual. It also noted how the Society has expanded its services to adjacent wards, providing meals to 80–200 patients daily.</p>
+          <div class="article-pullquote">
+            "I will not let the people in the ward go without food. It is as simple as that."<br>
+            <small style="font-family:var(--font-body)">— M. Radhakrishna Pillai</small>
+          </div>
+          <div class="article-byline">New Indian Express · August 25, 2023</div>
+        </div>
+      </article>
+
+      <!-- ===== VEENA GEORGE FACEBOOK / ASIANET COVERAGE ===== -->
+      <article class="article-card" data-outlet="asianet">
+        <div class="article-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-size:2.5rem;">📱</div>
+            <div style="font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:#0d47a1; font-weight:700; margin-top:.5rem;">Health Minister's Post</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-asianet">Minister's FB Post / Asianet</span>
+            <span class="article-date">August 29, 2023</span>
+          </div>
+          <h2>Health Minister Veena George Pays Tribute on Facebook</h2>
+          <div class="newspaper-clip">
+            <div class="clip-source">Veena George · Facebook · 29 August 2023</div>
+            <p class="ml-text">ജനറൽ ആശുപത്രി ഒൻപതാം വാർഡ് — ആരൂരുമില്ലാത്ത ആളുകൾ ചികിത്സ കഴിഞ്ഞ് സംരക്ഷിക്കപ്പെടുന്ന ഇടമാണ്. ഇന്ന് ഉഴക്ക് അവിടെ അന്തേവാസികൾക്ക് വസ്ത്രം നൽകാനെത്തിയപ്പോൾ കഴിഞ്ഞ 24 വർഷമായി ഒരു ദിവസം പോലും മുടങ്ങാതെ ഈ വാർഡ് ഉള്ളവർക്ക് ഉഴക്ക് ഭക്ഷണം നൽകുന്ന ബഹു. ശ്രീ. രാധാകൃഷ്ണ്‍ പിള്ളയെ കണ്ടു.</p>
+          </div>
+          <p>Kerala Health Minister Veena George visited Ward 9 of General Hospital to provide clothes to patients. During the visit, she encountered Sri Radhakrishna Pillai and his team delivering their daily meals — as they have done every day for 24 years without exception.</p>
+          <p>The Minister posted about the encounter on Facebook, calling the service "exemplary silent service" and praising the Matha Vanitha Charitable Society's dedication. She noted that Pillai's own family — including his children and grandchildren — had come from out of town that day to help cook and distribute the food. The post was widely shared and attracted significant public attention.</p>
+          <div class="article-byline">Veena George, Health Minister, Kerala · Facebook · August 29, 2023</div>
+        </div>
+      </article>
+
+      <!-- ===== MOHANLAL TV APPEARANCE ===== -->
+      <article class="article-card" data-outlet="doordarshan">
+        <div class="article-img" style="background:linear-gradient(135deg,#f3e5f5,#e1bee7); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-size:2.5rem;">📺</div>
+            <div style="font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:#4a148c; font-weight:700; margin-top:.5rem;">Television</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-doordarshan">Television Programme</span>
+            <span class="article-date">Featured in Vanitha Apr 2026</span>
+          </div>
+          <h2>Mohanlal Calls Him "Swami Appupan" — My Big Salute</h2>
+          <p>Actor Mohanlal, one of Malayalam cinema's most beloved stars, appeared alongside M. Radhakrishna Pillai in a television programme. Deeply moved by Pillai's account of his life of service, Mohanlal addressed him as <strong>"Swami Appupan"</strong> — a term of profound reverence combining the idea of a spiritual teacher and a beloved grandfather.</p>
+          <div class="article-pullquote">
+            "ത്യാഗ നിർഭരവും സേവനനന്ദവുമായ ജീവിതത്തെക്കുറിച്ചറിഞ്ഞപ്പോൾ സ്വാമി അപ്പൂഷൻ എന്നുവിളിക്കാനാണ് തോന്നിയത്. വിശ്ഷ്ടിൻ്റെ വിലയറിഞ്ഞ് ആദരത്തോടൊ നൽകുന്ന സ്വാമി അപ്പൂഷൻ — എന്റെ ബിഗ്‌സ്ലൂട്ട്."<br>
+            <small style="font-family:var(--font-body)">— Mohanlal (as quoted in Vanitha Magazine, April 2026)</small>
+          </div>
+          <p>The programme brought national attention to Pillai's quiet mission and to Matha Vanitha Charitable Society. Mohanlal's words were later cited in multiple print and digital media stories about the Society.</p>
+          <div class="article-byline">Television Programme · Referenced in Vanitha Magazine, April 2026</div>
+        </div>
+      </article>
+
+      <!-- ===== SENIOR CITIZENS AWARD 2003 ===== -->
+      <article class="article-card" data-outlet="nie">
+        <div class="article-img" style="background:linear-gradient(135deg,#fff8e1,#ffecb3); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-size:2.5rem;">🏅</div>
+            <div style="font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; color:#7c5e00; line-height:1.3; margin-top:.5rem;">Pulikottil Mathew Award<br>2003</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag tag-nie" style="background:#fff3cd;color:#856404;">Recognition</span>
+            <span class="article-date">18 December 2003</span>
+          </div>
+          <h2>Pulikottil Mathew &amp; Chinnamma Mathew Memorial Award 2003</h2>
+          <p>The Senior Citizens' Association, Trivandrum, selected Matha Vanitha Charitable Society for the prestigious Pulikottil Mathew &amp; Chinnamma Mathew Memorial Award for the year 2003 — only the second year the award was given (the first went to the Cheshire Home in 2002).</p>
+          <p>The award citation noted that the Society had been supplying lunch daily to an average of 70–100 destitute elderly patients of Ward 9 of General Hospital continuously from 28 April 2000, without any break — also providing essential articles like clothes and medicines not supplied by the hospital.</p>
+          <div class="article-pullquote">
+            "The Governing Council has selected Matha Vanitha Charitable Society… engaged in various activities aimed at the welfare of destitute and indigent senior citizens in Trivandrum City."<br>
+            <small style="font-family:var(--font-body)">— K.V. Rajappan Nair (Secretary) &amp; K. Radhakrishna Menon (President), Senior Citizens' Association, Trivandrum</small>
+          </div>
+          <div class="article-byline">Senior Citizens' Association, Trivandrum · 18 December 2003</div>
+        </div>
+      </article>
+
+      <!-- ===== GENERAL HOSPITAL SUPERINTENDENT'S NOTE ===== -->
+      <article class="article-card" data-outlet="asianet">
+        <div class="article-img" style="background:linear-gradient(135deg,#e0f7fa,#b2ebf2); justify-content:center;">
+          <div style="text-align:center; padding:2rem;">
+            <div style="font-size:2.5rem;">🏥</div>
+            <div style="font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:#00695c; font-weight:700; margin-top:.5rem;">General Hospital<br>Thiruvananthapuram</div>
+          </div>
+        </div>
+        <div class="article-body">
+          <div class="article-meta">
+            <span class="outlet-tag" style="background:#e0f7fa;color:#00695c;">Official Recognition</span>
+            <span class="article-date">17 January 2025</span>
+          </div>
+          <h2>General Hospital Superintendent's Commendation — 25 Years of Service</h2>
+          <p>On 17 January 2025, the Superintendent of Government General Hospital, Thiruvananthapuram, issued an official letter of commendation to mark Matha Vanitha Charitable Society's 25th anniversary.</p>
+          <p>The letter praised the Society for providing free noon meals to all patients of Ward 9 — those without families and those in vulnerable conditions — every single day since 28 April 2000, without interruption. It commended the founding patron, Sri M. Radhakrishna Pillai, for his extraordinary dedication over 25 years and his lifelong commitment to the hospital's patients and staff.</p>
+          <div class="article-pullquote">
+            "25 വർഷമായി ഒരു ദിവസം പോലും ഈ ഭക്ഷണ വിതരണം മുടക്കിയിട്ടില്ല എന്നത് അനുകരണീയമാണ്."<br>
+            <small style="font-family:var(--font-body)">— Superintendent, Govt. General Hospital, Thiruvananthapuram · 17 January 2025</small>
+          </div>
+          <div class="article-byline">Government General Hospital, Thiruvananthapuram · 17 January 2025</div>
+        </div>
+      </article>
+
+    </div><!-- /articles-grid -->
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"><div class="cta-circle"></div></div>
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Be Part of the<br><em>Next Chapter</em></h2>
+      <p>Every article above tells the story of ordinary people doing extraordinary things. You can be part of that story.</p>
+      <div class="cta-btns">
+        <a href="/donate" class="btn-primary btn-large">Donate Now</a>
+        <a href="/contact" class="btn-ghost">Volunteer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><span class="logo-mark">MVS</span><span class="logo-text">Matha Vanitha</span></div>
+        <p>Charitable Society No. T.541<br>Trivandrum, Kerala</p>
+      </div>
+      <div class="footer-col"><h4>Address</h4><p>T.C. 29/509, Lekshmi Mandiram,<br>Kabarady Road, Pettah,<br>Trivandrum – 695 024</p></div>
+      <div class="footer-col"><h4>Contact</h4><p>Phone: 0471-2453051<br>Secretary: 8547166077</p></div>
+      <div class="footer-col"><h4>Bank</h4><p>SBI Kaithamukku<br>A/C: 67209296391<br>IFSC: SBIN0070338<br><strong>GPay: 8547166077</strong></p></div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Matha Vanitha Charitable Society · <a href="http://www.mathavanitha.in">mathavanitha.in</a></p></div>
+  </div>
+</footer>
+
+<script src="/public/js/main.js"></script>
+<script>
+// Filter functionality
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.article-card[data-outlet]');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    cards.forEach(card => {
+      if (filter === 'all' || card.dataset.outlet === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
