@@ -1,36 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Matha Vanitha Charitable Society — Annadanam Mahadanam</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/public/css/main.css">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Matha Vanitha Charitable Society — Annadanam Mahadanam{% endblock %}
+{% block content %}
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <span class="logo-mark">MVS</span>
-      <span class="logo-text">Matha Vanitha</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">Our Story</a></li>
-      <li><a href="/press">In the News</a></li>
-      <li><a href="/donate" class="btn-nav">Donate</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
     <div class="grain"></div>
@@ -40,10 +11,7 @@
   </div>
   <div class="hero-content">
     <div class="hero-badge">Est. March 2000 · Trivandrum</div>
-    <h1 class="hero-title">
-      <em>Annadanam</em><br>
-      <span>Mahadanam</span>
-    </h1>
+    <h1 class="hero-title"><em>Annadanam</em><br><span>Mahadanam</span></h1>
     <p class="hero-sub">Serving free noon meals to destitute patients at Thiruvananthapuram General Hospital — every single day, without fail, for over 25 years.</p>
     <div class="hero-ctas">
       <a href="/donate" class="btn-primary">Support This Mission</a>
@@ -53,65 +21,33 @@
   <div class="hero-scroll-hint">scroll</div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker">
-    <span>Annadanam Mahadanam</span>
-    <span>·</span>
-    <span>Ward 9, General Hospital, Trivandrum</span>
-    <span>·</span>
-    <span>Since 28 April 2000</span>
-    <span>·</span>
-    <span>Not a single day missed</span>
-    <span>·</span>
-    <span>Annadanam Mahadanam</span>
-    <span>·</span>
-    <span>Ward 9, General Hospital, Trivandrum</span>
-    <span>·</span>
-    <span>Since 28 April 2000</span>
-    <span>·</span>
-    <span>Not a single day missed</span>
-    <span>·</span>
+    <span>Annadanam Mahadanam</span><span>·</span><span>Ward 9, General Hospital, Trivandrum</span><span>·</span><span>Since 28 April 2000</span><span>·</span><span>Not a single day missed</span><span>·</span><span>Annadanam Mahadanam</span><span>·</span><span>Ward 9, General Hospital, Trivandrum</span><span>·</span><span>Since 28 April 2000</span><span>·</span><span>Not a single day missed</span><span>·</span>
   </div>
 </div>
 
-<!-- STATS -->
 <section class="stats-section">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-card" data-animate>
-        <div class="stat-num" data-count="25">0</div>
-        <div class="stat-label">Years of Unbroken Service</div>
-      </div>
-      <div class="stat-card" data-animate>
-        <div class="stat-num">200+</div>
-        <div class="stat-label">Patients Fed Daily</div>
-      </div>
-      <div class="stat-card" data-animate>
-        <div class="stat-num">₹0</div>
-        <div class="stat-label">Charged to Any Patient</div>
-      </div>
-      <div class="stat-card" data-animate>
-        <div class="stat-num">9th</div>
-        <div class="stat-label">Ward, General Hospital</div>
-      </div>
+      <div class="stat-card" data-animate><div class="stat-num" data-count="25">0</div><div class="stat-label">Years of Unbroken Service</div></div>
+      <div class="stat-card" data-animate><div class="stat-num">200+</div><div class="stat-label">Patients Fed Daily</div></div>
+      <div class="stat-card" data-animate><div class="stat-num">₹0</div><div class="stat-label">Charged to Any Patient</div></div>
+      <div class="stat-card" data-animate><div class="stat-num">9th</div><div class="stat-label">Ward, General Hospital</div></div>
     </div>
   </div>
 </section>
 
-<!-- STORY PULL-QUOTE -->
 <section class="quote-section">
   <div class="container">
     <div class="quote-layout">
       <div class="quote-side">
         <div class="quote-line"></div>
-        <blockquote>
-          "You may do many things tomorrow.<br>But what you did today…"
-        </blockquote>
+        <blockquote>"You may do many things tomorrow.<br>But what you did today…"</blockquote>
         <cite>— Motto of Matha Vanitha Charitable Society</cite>
       </div>
       <div class="quote-body">
-        <p>It began with a retired government employee, M. Radhakrishna Pillai, who noticed destitute patients in the 9th ward of Trivandrum General Hospital going hungry. With his meagre pension, he started feeding them — quietly, without fanfare, without asking for anything in return.</p>
+        <p>It began with a retired government employee, M. Radhakrishna Pillai, who noticed destitute patients in the 9th ward of Trivandrum General Hospital going hungry. With his meagre pension, he started feeding them — quietly, without fanfare.</p>
         <p>A group of women joined him. They registered Matha Vanitha Charitable Society on 1 March 2000. Since 28 April 2000, not one day has passed without a warm noon meal reaching the patients of Ward 9.</p>
         <a href="/about" class="link-arrow">Read the full story →</a>
       </div>
@@ -119,7 +55,6 @@
   </div>
 </section>
 
-<!-- WHAT WE DO -->
 <section class="services-section">
   <div class="container">
     <div class="section-header">
@@ -127,41 +62,16 @@
       <h2>Beyond a meal,<br><em>a lifeline</em></h2>
     </div>
     <div class="services-grid">
-      <div class="service-card" data-animate>
-        <div class="service-icon">🍱</div>
-        <h3>Daily Annadanam</h3>
-        <p>Free nutritious noon meals served every day to 80–200 patients at Ward 9 and nearby wards of General Hospital — rice, two curries, pickle, and on festivals, extras like payasam.</p>
-      </div>
-      <div class="service-card" data-animate>
-        <div class="service-icon">💊</div>
-        <h3>Medicine & Supplies</h3>
-        <p>Providing essential medicines, clothes, and medical utility items that the hospital doesn't supply to poor and destitute patients.</p>
-      </div>
-      <div class="service-card" data-animate>
-        <div class="service-icon">♿</div>
-        <h3>Mobility & Care Aids</h3>
-        <p>Wheelchairs, walkers, and assistive devices given freely to those who need them across Trivandrum.</p>
-      </div>
-      <div class="service-card" data-animate>
-        <div class="service-icon">🎓</div>
-        <h3>Education Support</h3>
-        <p>Educational aids, books, bags, and financial assistance provided to selected school students in need.</p>
-      </div>
-      <div class="service-card" data-animate>
-        <div class="service-icon">🌾</div>
-        <h3>Monthly Rice Distribution</h3>
-        <p>5–10 kg of rice donated every second Saturday to physically and financially challenged individuals and families.</p>
-      </div>
-      <div class="service-card" data-animate>
-        <div class="service-icon">🏥</div>
-        <h3>Treatment Support</h3>
-        <p>Financial assistance for patients undergoing cardiac, cancer, and dialysis treatment who cannot afford care.</p>
-      </div>
+      <div class="service-card" data-animate><div class="service-icon">🍱</div><h3>Daily Annadanam</h3><p>Free nutritious noon meals served every day to 80–200 patients at Ward 9 and nearby wards — rice, curries, pickle, and on festivals, payasam.</p></div>
+      <div class="service-card" data-animate><div class="service-icon">💊</div><h3>Medicine & Supplies</h3><p>Providing essential medicines, clothes, and medical utility items that the hospital doesn't supply to poor patients.</p></div>
+      <div class="service-card" data-animate><div class="service-icon">♿</div><h3>Mobility & Care Aids</h3><p>Wheelchairs, walkers, and assistive devices given freely to those who need them across Trivandrum.</p></div>
+      <div class="service-card" data-animate><div class="service-icon">🎓</div><h3>Education Support</h3><p>Educational aids, books, bags, and financial assistance provided to selected school students in need.</p></div>
+      <div class="service-card" data-animate><div class="service-icon">🌾</div><h3>Monthly Rice Distribution</h3><p>5–10 kg of rice donated every second Saturday to physically and financially challenged individuals.</p></div>
+      <div class="service-card" data-animate><div class="service-icon">🏥</div><h3>Treatment Support</h3><p>Financial assistance for patients undergoing cardiac, cancer, and dialysis treatment.</p></div>
     </div>
   </div>
 </section>
 
-<!-- FOUNDER SPOTLIGHT -->
 <section class="founder-section">
   <div class="container">
     <div class="founder-layout">
@@ -170,29 +80,20 @@
         <h2>Sri M. Radhakrishna Pillai</h2>
         <p class="founder-title">Patron & Founder · Retired Superintendent, Kerala State Technical Education Dept.</p>
         <p>At 94, he still oversees the cooking and delivery of meals every single day from his residence on Kabarady Road. His wife Indiramma passed away years ago, but her spirit of service lives on in the Society she co-founded.</p>
-        <p>Actor Mohanlal, who featured alongside him in a television program, called him <strong>"Swami Appupan"</strong> — a grandfather-saint — and praised his extraordinary life of service.</p>
+        <p>Actor Mohanlal called him <strong>"Swami Appupan"</strong> — a grandfather-saint — and praised his extraordinary life of service on national television.</p>
         <p><em>"When they eat, and their faces light up — my eyes fill with tears. That is my pension."</em></p>
       </div>
       <div class="founder-visual">
         <div class="founder-card-decor">
           <div class="fc-ring"></div>
-          <div class="fc-box">
-            <div class="fc-year">2000</div>
-            <div class="fc-line"></div>
-            <div class="fc-desc">Founded</div>
-          </div>
-          <div class="fc-award">
-            <div class="award-badge">🏅</div>
-            <div>Pulikottil Mathew &amp; Chinnamma Mathew Memorial Award 2003</div>
-            <small>Senior Citizens' Association, Trivandrum</small>
-          </div>
+          <div class="fc-box"><div class="fc-year">2000</div><div class="fc-line"></div><div class="fc-desc">Founded</div></div>
+          <div class="fc-award"><div class="award-badge">🏅</div><div>Pulikottil Mathew &amp; Chinnamma Mathew Memorial Award 2003</div><small>Senior Citizens' Association, Trivandrum</small></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PRESS / RECOGNITION -->
 <section class="press-section">
   <div class="container">
     <span class="section-tag">As Seen In</span>
@@ -206,15 +107,12 @@
   </div>
 </section>
 
-<!-- DONATE CTA -->
 <section class="cta-section">
-  <div class="cta-bg">
-    <div class="cta-circle"></div>
-  </div>
+  <div class="cta-bg"><div class="cta-circle"></div></div>
   <div class="container">
     <div class="cta-inner">
       <h2>One meal.<br><em>One life touched.</em></h2>
-      <p>Sponsoring a day of Annadanam costs approximately ₹5,000. Every contribution — however small — reaches someone who has no one else to turn to.</p>
+      <p>Sponsoring a day of Annadanam costs approximately ₹5,000. Every contribution reaches someone who has no one else to turn to.</p>
       <div class="cta-btns">
         <a href="/donate" class="btn-primary btn-large">Donate Now</a>
         <a href="/contact" class="btn-ghost">Get Involved</a>
@@ -224,37 +122,4 @@
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo">
-          <span class="logo-mark">MVS</span>
-          <span class="logo-text">Matha Vanitha</span>
-        </div>
-        <p>Charitable Society No. T.541<br>Registered under Travancore–Cochin Literary, Scientific and Charitable Societies Registration Act 1955</p>
-      </div>
-      <div class="footer-col">
-        <h4>Address</h4>
-        <p>T.C. 29/509, Lekshmi Mandiram,<br>Near Melamkottu Amman Kovil,<br>Kabarady Road, Pettah,<br>Trivandrum – 695 024, Kerala</p>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Phone: 0471-2453051<br>Sri Radhakrishna Pillai: 8590909838<br>Smt. R. Jayalakshmi (Secretary): 8547166077</p>
-      </div>
-      <div class="footer-col">
-        <h4>Bank Details</h4>
-        <p>State Bank of India<br>Kaithamukku Branch<br>A/C: 67209296391<br>IFSC: SBIN0070338</p>
-        <p><strong>GPay: 8547166077</strong></p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Matha Vanitha Charitable Society · <a href="http://www.mathavanitha.in" target="_blank">mathavanitha.in</a></p>
-    </div>
-  </div>
-</footer>
-
-<script src="/public/js/main.js"></script>
-</body>
-</html>
+{% endblock %}

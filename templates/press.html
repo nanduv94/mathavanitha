@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>In the News — Matha Vanitha Charitable Society</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/public/css/main.css">
-  <style>
+{% extends "base.html" %}
+{% block title %}In the News — Matha Vanitha Charitable Society{% endblock %}
+
+{% block extra_style %}
+
     /* ---- PRESS-PAGE SPECIFIC ---- */
     .press-hero {
       padding: 10rem 0 5rem;
@@ -153,23 +149,11 @@
       .article-card.featured .article-img { width: 100%; aspect-ratio: 16/9; }
       .articles-grid { grid-template-columns: 1fr; }
     }
-  </style>
-</head>
-<body>
+  
+{% endblock %}
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo"><span class="logo-mark">MVS</span><span class="logo-text">Matha Vanitha</span></a>
-    <ul class="nav-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">Our Story</a></li>
-      <li><a href="/press">In the News</a></li>
-      <li><a href="/donate" class="btn-nav">Donate</a></li>
-      <li><a href="/contact">Contact</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
-  </div>
-</nav>
+{% block content %}
+
 
 <!-- HERO -->
 <section class="press-hero">
@@ -463,22 +447,10 @@
   </div>
 </section>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo"><span class="logo-mark">MVS</span><span class="logo-text">Matha Vanitha</span></div>
-        <p>Charitable Society No. T.541<br>Trivandrum, Kerala</p>
-      </div>
-      <div class="footer-col"><h4>Address</h4><p>T.C. 29/509, Lekshmi Mandiram,<br>Kabarady Road, Pettah,<br>Trivandrum – 695 024</p></div>
-      <div class="footer-col"><h4>Contact</h4><p>Phone: 0471-2453051<br>Secretary: 8547166077</p></div>
-      <div class="footer-col"><h4>Bank</h4><p>SBI Kaithamukku<br>A/C: 67209296391<br>IFSC: SBIN0070338<br><strong>GPay: 8547166077</strong></p></div>
-    </div>
-    <div class="footer-bottom"><p>© 2025 Matha Vanitha Charitable Society · <a href="http://www.mathavanitha.in">mathavanitha.in</a></p></div>
-  </div>
-</footer>
 
-<script src="/public/js/main.js"></script>
+{% endblock %}
+
+{% block extra_script %}
 <script>
 // Filter functionality
 const filterBtns = document.querySelectorAll('.filter-btn');
@@ -499,5 +471,4 @@ filterBtns.forEach(btn => {
   });
 });
 </script>
-</body>
-</html>
+{% endblock %}
