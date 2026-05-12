@@ -28,11 +28,25 @@
           <div class="bank-row"><span class="bank-label">Account Name</span><span class="bank-value">Matha Vanitha Charitable Society T541</span></div>
           <div class="bank-row"><span class="bank-label">Account No.</span><span class="bank-value">67209296391</span></div>
           <div class="bank-row"><span class="bank-label">IFSC Code</span><span class="bank-value">SBIN0070338</span></div>
-          <div class="gpay-box">
-            <small>Google Pay / UPI</small>
-            <div class="gpay-num">mathavanitha@sbi</div>
-            <small>After sending, please share your name, address &amp; mobile number with us</small>
+          <div class="gpay-box" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);">
+          <small style="color: rgba(255,255,255,0.7); font-weight: 500;">Scan to donate with Google Pay / UPI</small>
+          <!-- QR Code Image -->
+          <div class="qr-container" style="margin: 1.25rem 0; display: flex; justify-content: center;">
+            <a href="upi://pay?pa=mathavanitha@sbi&pn=Matha%20Vanitha%20Charitable%20Society%20NOT541OP" style="text-decoration: none; display: block;"></a>
+              <img src="{{ url_for('static', filename='images/gpay_qr.jpeg') }}" 
+                  alt="Matha Vanitha GPay QR Code" 
+                  style="width: 180px; height: 180px; border-radius: 8px; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+            </a>
           </div>
+          <!-- UPI ID Styling -->
+          <div class="gpay-num" style="font-size: 1.3rem; letter-spacing: 1.5px; color: var(--gold); font-weight: 700;">
+              mathavanitha@sbi
+          </div>
+          
+          <small style="display: block; margin-top: 10px; opacity: 0.7; color: #fff; font-size: 11px; line-height: 1.4;">
+              After sending, please share your name, address &amp; mobile number with us
+          </small>
+      </div>
         </div>
         <div class="info-card" style="margin-top:1.5rem">
           <h4>Important Note</h4>
