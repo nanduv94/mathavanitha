@@ -13,7 +13,7 @@ app = Flask(
 
 STATS = {
     "years_serving": datetime.now().year - 2000,
-    "meals_served": "2,00,000+",
+    "meals_served": "1,800,000+",
     "patients_daily": "80-200",
     "started": "28 April 2000"
 }
